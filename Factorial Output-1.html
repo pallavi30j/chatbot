@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://127.0.0.1:5500/Factorial.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factorial Calculator</title>
+  <style>
+
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color:azure;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 300px;
+      margin: 50px auto;
+      background-color:white;
+      padding: 20px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input {
+      padding: 5px;
+      margin: 10px;
+      width: 80px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      cursor: pointer;
+      background-color:rgb(53, 172, 172);
+      color: #fff;
+    }
+    button:hover {
+      background-color:rgb(53, 172, 172);
+    }
+    #result {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  
+
+<div class="container">
+  <h2>Factorial Calculator</h2>
+  <label for="numberInput">Enter a number:</label><br>
+  <input type="number" id="numberInput" min="0"><br>
+
+  <button onclick="calculateFactorial(&#39;iterative&#39;)">Iterative</button>
+  <button onclick="calculateFactorial(&#39;recursive&#39;)">Recursive</button>
+
+  <p id="result"> Factorial of 3 is: 6</p>
+</div>
+
+<script>
+ 
+  function factorialIterative(n) {
+    if (n === 0 || n === 1) return 1;
+    let result = 1;
+    for (let i = 2; i <= n; i++) {
+      result *= i;
+    }
+    return result;
+  }
+
+  
+  function factorialRecursive(n) {
+    if (n === 0 || n === 1) return 1;
+    return n * factorialRecursive(n - 1);
+  }
+
+
+  function calculateFactorial(method) {
+    const inputElement = document.getElementById("numberInput");
+    const num = parseInt(inputElement.value, 10);
+
+
+    if (isNaN(num) || num < 0) {
+      document.getElementById("result").innerText = "Please enter a valid non-negative number!";
+      return;
+    }
+
+  
+    let result;
+    if (method === "iterative") {
+      result = factorialIterative(num);
+    } else {
+      result = factorialRecursive(num);
+    }
+
+    
+    document.getElementById("result").innerText = " Factorial of " + num +  " is: " +result;
+  }
+</script>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
